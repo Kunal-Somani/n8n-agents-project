@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  n8n:
+    image: n8nio/n8n
+    restart: always
+    ports:
+      - "5679:5678"
+    environment:
+      # This allows n8n's Code node to install custom npm packages
+      - NODE_FUNCTION_ALLOW_EXTERNAL=axios,cheerio
+    volumes:
+      # This line maps the .n8n folder we created to the container
+      - ./.n8n:/home/node/.n8n
+
+# We don't need a separate "volumes" top-level key
+# because we are using a bind mount (./.n8n)
