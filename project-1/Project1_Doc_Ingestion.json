@@ -9,7 +9,7 @@
         0,
         0
       ],
-      "id": "d7ad147a-35a3-4f9d-a98c-1ed03838e0dd",
+      "id": "dbed52fa-a15e-4c0b-ac4a-d2060145fc3b",
       "name": "When clicking ‘Execute workflow’"
     },
     {
@@ -29,7 +29,7 @@
         224,
         0
       ],
-      "id": "37d30b10-6c3b-4f00-85cc-513b862c8d06",
+      "id": "7d608fdf-6e85-4bdd-827f-b81fdc5d2f9b",
       "name": "HTTP Request"
     },
     {
@@ -47,28 +47,9 @@
         496,
         0
       ],
-      "id": "4ad1c6c2-c202-4533-8f65-e5bebb1c9157",
+      "id": "5599c512-c058-4fcb-946e-c1f1ff0b54bf",
       "name": "Simple Vector Store",
       "notesInFlow": false
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
-      "typeVersion": 1.2,
-      "position": [
-        416,
-        176
-      ],
-      "id": "2f3eefa5-a35c-46c6-9c53-0ecef7edadd9",
-      "name": "Embeddings OpenAI",
-      "credentials": {
-        "openAiApi": {
-          "id": "wuN37E3ogRaQvheM",
-          "name": "OpenAi account"
-        }
-      }
     },
     {
       "parameters": {
@@ -82,8 +63,27 @@
         640,
         176
       ],
-      "id": "a54b59c5-402a-4b44-aa3e-5359c3f257ee",
+      "id": "c0b8ccc8-2e28-432a-8950-51dffcbefe9d",
       "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "model": "nomic-embed-text:latest"
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
+      "typeVersion": 1,
+      "position": [
+        416,
+        176
+      ],
+      "id": "8741c20e-a0ed-4efb-9169-5451e2532d6f",
+      "name": "Embeddings Ollama",
+      "credentials": {
+        "ollamaApi": {
+          "id": "a5DIFnzKljSIt7ZY",
+          "name": "Ollama account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -110,17 +110,6 @@
         ]
       ]
     },
-    "Embeddings OpenAI": {
-      "ai_embedding": [
-        [
-          {
-            "node": "Simple Vector Store",
-            "type": "ai_embedding",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Default Data Loader": {
       "ai_document": [
         [
@@ -131,17 +120,28 @@
           }
         ]
       ]
+    },
+    "Embeddings Ollama": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "5993fe65-03c8-4311-bc01-72c7fef26585",
+  "versionId": "62ba605e-a984-46f5-bb07-85e505724891",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "510d8e4857741bb67d61b20dd97c0a639eab26faff4cc8e2ccfa14019a176ccf"
   },
-  "id": "Cv5x39fGeXQNWl2L",
+  "id": "9ujcUr1TGL98gc0u",
   "tags": []
 }

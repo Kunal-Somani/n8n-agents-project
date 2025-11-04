@@ -42,4 +42,3 @@ An efficient, autonomous pipeline designed to monitor the academic landscape and
 * **Primary Goal:** Automated data acquisition, complex data transformation, LLM synthesis, and report delivery in a resource-efficient manner.
 * **Key LLM Function:** Employs **Gemini 2.5 Flash** for **advanced synthesis** of complex academic abstracts, distilling multiple papers into a single, high-level digest.
 * **RAG Implementation:** Uses a **dynamic RAG pipeline** that ingests the latest research abstracts upon every scheduled run, guaranteeing the summary is grounded in the current day's findings.
-* **Actionable Integration:** Demonstrates **multi-stage custom API integration** including fetching complex Atom XML data from the **ArXiv API** and utilizing **SMTP** to send the final report, proving end-to-end automation competency.
