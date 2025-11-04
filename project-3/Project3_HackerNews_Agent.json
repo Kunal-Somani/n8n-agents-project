@@ -16,7 +16,7 @@
       "typeVersion": 1.2,
       "position": [
         0,
-        0
+        -96
       ],
       "id": "f6a1f6bf-e609-4e51-96b4-ccc56700b513",
       "name": "Schedule Trigger"
@@ -37,7 +37,7 @@
       "typeVersion": 4.3,
       "position": [
         224,
-        0
+        -96
       ],
       "id": "10ffbe7b-818e-4e2d-a614-75e5d9d5d571",
       "name": "HTTP Request"
@@ -60,7 +60,7 @@
       "typeVersion": 3.4,
       "position": [
         672,
-        0
+        -96
       ],
       "id": "6f9c7d03-f823-46dd-bb4d-bc9f67c7698a",
       "name": "Edit Fields"
@@ -75,7 +75,7 @@
       "typeVersion": 1,
       "position": [
         448,
-        0
+        -96
       ],
       "id": "f1e18a72-e637-4d01-843c-43b0bea8d556",
       "name": "Aggregate"
@@ -95,7 +95,7 @@
       "typeVersion": 4.3,
       "position": [
         1120,
-        0
+        -96
       ],
       "id": "7a9f6ee2-fb94-4e46-aba0-10b6bc239655",
       "name": "HTTP Request1"
@@ -124,7 +124,7 @@
       "typeVersion": 3.4,
       "position": [
         1344,
-        0
+        -96
       ],
       "id": "8827a420-f635-4e85-a9b5-3bd7d9edbf90",
       "name": "Edit Fields1"
@@ -137,7 +137,7 @@
       "typeVersion": 1.1,
       "position": [
         896,
-        0
+        -96
       ],
       "id": "e4a0194a-6851-4996-bc8f-e5c9a3d305e6",
       "name": "Wait",
@@ -153,7 +153,7 @@
       "typeVersion": 1,
       "position": [
         1568,
-        0
+        -96
       ],
       "id": "35ff439b-a456-4b6c-ab4f-10aa4813e66a",
       "name": "Split Out"
@@ -173,7 +173,7 @@
       "typeVersion": 4.3,
       "position": [
         1792,
-        0
+        -96
       ],
       "id": "633ec691-bbe0-439f-9841-0ef6a358d4b0",
       "name": "HTTP Request2"
@@ -196,7 +196,7 @@
       "typeVersion": 3.4,
       "position": [
         2016,
-        0
+        -96
       ],
       "id": "fa3f2dc4-ca4b-420b-8ef3-98fdb386f18d",
       "name": "Edit Fields2"
@@ -213,7 +213,7 @@
       "typeVersion": 3,
       "position": [
         2272,
-        0
+        -96
       ],
       "id": "ffd61089-67ed-4d3f-b994-290f62123ca2",
       "name": "AI Agent"
@@ -233,7 +233,7 @@
       "typeVersion": 1.3,
       "position": [
         2368,
-        224
+        128
       ],
       "id": "1d969c7e-5632-487e-809c-9e15cee8f95a",
       "name": "Simple Vector Store1"
@@ -246,7 +246,7 @@
       "typeVersion": 1,
       "position": [
         2448,
-        432
+        336
       ],
       "id": "215a8a61-7474-4c02-b158-b6d3ad2ebea3",
       "name": "Embeddings Ollama1",
@@ -265,7 +265,7 @@
       "typeVersion": 1,
       "position": [
         2240,
-        224
+        128
       ],
       "id": "c18afd38-8c9a-41d4-a770-52069515e4ca",
       "name": "Google Gemini Chat Model",
@@ -273,6 +273,113 @@
         "googlePalmApi": {
           "id": "EZlEMT9vXQ30b9WY",
           "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3b9da1b0-ed68-4196-8e9d-c9ba60c04fdc",
+              "leftValue": "={{ $json.output }}",
+              "rightValue": "unable to retrieve",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            },
+            {
+              "id": "b89e3c65-7de9-4625-b2dd-d407f1739706",
+              "leftValue": "={{ $json.output }}",
+              "rightValue": "could not find",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2736,
+        -96
+      ],
+      "id": "94d39c60-1369-4932-b67d-b6124af6478e",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "story_summaries",
+        "include": "specifiedFields",
+        "fieldsToInclude": "output",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2960,
+        -96
+      ],
+      "id": "d205390e-f16a-493c-a4aa-34a93994befc",
+      "name": "Aggregate1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9b5e08d7-b56b-47e0-be4d-3a678ff1b7a1",
+              "name": "final_report",
+              "value": "={{ \n  $json.story_summaries\n    .map(item => item.output)\n    .filter(text => \n      !text.includes(\"I am sorry\") && \n      !text.includes(\"unable to retrieve\") && \n      !text.includes(\"could not find\") &&\n      !text.includes(\"no user comments\") &&\n      !text.includes(\"cannot provide a summary\")\n    )\n    .join('\\n\\n---\\n\\n') \n}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3184,
+        -96
+      ],
+      "id": "5d0058da-1669-4054-9f24-c5ed4e4950d1",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "fromEmail": "kunal120222@gmail.com",
+        "toEmail": "ks19032005@gmail.com",
+        "subject": "=Hacker News AI Digest for {{ new Date().toLocaleDateString('en-US') }}",
+        "emailFormat": "text",
+        "text": "={{ $json.final_report }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        3408,
+        -96
+      ],
+      "id": "464e218f-3b4f-4483-a8da-f677ff339a99",
+      "name": "Send email",
+      "webhookId": "6212a11f-4c19-4ca1-a9a6-fa7f715fec26",
+      "credentials": {
+        "smtp": {
+          "id": "UBxTZWT5QG2eyJPh",
+          "name": "SMTP account"
         }
       }
     }
@@ -421,13 +528,57 @@
           }
         ]
       ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Send email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "5c92c2a4-af45-4045-bb53-da244d8d7bdc",
+  "versionId": "6d46c595-9580-44d3-aca7-b7c9e28c03b3",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "510d8e4857741bb67d61b20dd97c0a639eab26faff4cc8e2ccfa14019a176ccf"
