@@ -11,7 +11,7 @@ To engineer a highly reliable, autonomous workflow capable of **advanced issue t
 | Component | Technology Used | Role and Professional Rationale |
 | :--- | :--- | :--- |
 | **Orchestration** | **n8n (Self-Hosted via Docker)** | Serves as the robust, visual control plane. Docker ensures consistent, reproducible environment deployment. The platform manages the sequential and conditional execution of the multi-agent system. |
-| **LLM (Classification)** | **Google Gemini 1.5 Flash** | Selected specifically for its **superior instruction-following capabilities** and high-rate performance, which resolved persistent classification failures encountered with less reliable local models. Used for the critical "Classifier" role. |
+| **LLM (Classification)** | **Google Gemini 2.5 Flash** | Selected specifically for its **superior instruction-following capabilities** and high-rate performance, which resolved persistent classification failures encountered with less reliable local models. Used for the critical "Classifier" role. |
 | **RAG/Embeddings** | **Ollama Nomic-Embed-Text & Simple Vector Store** | Implements a **local, low-latency RAG pipeline**. Nomic-Embed-Text generates high-quality vectors from project documentation, ensuring the "Answer Agent" is grounded in accurate context. |
 | **API Integration** | **GitHub API (via HTTP Request)** | Provides the **custom API functionality**. The HTTP Request node is configured with a Personal Access Token (PAT) and uses dynamic URL routing to post comments and apply labels, transforming AI decisions into actionable workflow changes. |
 
@@ -44,7 +44,7 @@ The solution operates as a **two-stage agentic system**, separating the critical
 
 This project successfully proves advanced competency in the following areas, exceeding baseline requirements:
 
-* **Reliable AI Decisioning:** Overcoming local model instability by integrating and configuring a powerful instruction-following model (**Gemini 1.5 Flash**) for mission-critical classification.
+* **Reliable AI Decisioning:** Overcoming local model instability by integrating and configuring a powerful instruction-following model (**Gemini 2.5 Flash**) for mission-critical classification.
 * **Agentic Architecture:** Designing a **multi-agent system** where specialized agents (`Classifier` and `Answer-Bot`) share context and data flow responsibility, leading to superior final output quality.
 * **Robust Data Handling:** Implementing solutions (like the `Merge` and `trim()` expressions) to guarantee data integrity across complex workflow branches, ensuring the system can reliably read messy LLM output.
 * **Custom API Integration:** Demonstrating precise control over external systems by using dynamic URL resolution and authentication to perform write operations (comments and labels) via the **GitHub REST API**.
