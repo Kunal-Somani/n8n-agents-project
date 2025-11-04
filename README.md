@@ -31,7 +31,7 @@ We leverage a hybrid architecture combining local open-source models with cloud-
 An autonomous agent that monitors a designated repository for new issues, automatically classifies them, and provides immediate, context-aware action.
 
 * **Primary Goal:** Automated issue classification and initial response, ensuring rapid and accurate triage without human intervention.
-* **Key LLM Function:** Employs the **Gemini 2.5 Flash** model for superior **classification logic** (`question`, `bug`, or `feature`), utilizing a dedicated multi-step workflow to ensure model reliability.
+* **Key LLM Function:** Employs the **Gemini 2.5 Flash** model for superior **classification logic** (`question`, `bug`, `feature`), utilizing a dedicated multi-step workflow to ensure model reliability.
 * **RAG Implementation:** A dedicated **Answer Agent** is instantiated only on the `question` path, using a RAG pipeline to retrieve relevant installation or usage instructions from project documentation *before* drafting a final comment.
 * **Actionable Integration:** Executes real-world actions via the **GitHub API** for two distinct purposes: posting the RAG-generated answer and applying the corresponding triage label.
 
@@ -42,3 +42,13 @@ An efficient, autonomous pipeline designed to monitor the academic landscape and
 * **Primary Goal:** Automated data acquisition, complex data transformation, LLM synthesis, and report delivery in a resource-efficient manner.
 * **Key LLM Function:** Employs **Gemini 2.5 Flash** for **advanced synthesis** of complex academic abstracts, distilling multiple papers into a single, high-level digest.
 * **RAG Implementation:** Uses a **dynamic RAG pipeline** that ingests the latest research abstracts upon every scheduled run, guaranteeing the summary is grounded in the current day's findings.
+* **Actionable Integration:** Demonstrates **multi-stage custom API integration** including fetching complex Atom XML data from the **ArXiv API** and utilizing **SMTP** to send the final report.
+
+### Project 3: Live Hacker News 'Sentiment' Agent
+
+An advanced, scheduled agent that performs **live data aggregation** from the Hacker News API and analyzes unstructured, real-time user-generated content.
+
+* **Primary Goal:** To demonstrate a dynamic RAG pipeline on live user comments, moving beyond static document analysis to perform real-time sentiment synthesis.
+* **Key LLM Function:** Employs **Gemini 2.5 Flash** to synthesize sentiment and key discussion points from dozens of unstructured user comments into a concise, executive-level summary.
+* **RAG Implementation:** This is the project's core complexity. It creates a **"just-in-time" vector store** *for each individual news story*, using the story's title as a dynamic `Memory Key`. This perfectly isolates the AI's context for each summary.
+* **Actionable Integration:** Fetches data via a **complex, nested-loop API call** (story -> comments) and delivers a single, aggregated report via **SMTP**.
