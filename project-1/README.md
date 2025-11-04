@@ -44,7 +44,7 @@ The solution operates as a **two-stage agentic system**, separating the critical
 
 This project successfully proves advanced competency in the following areas, exceeding baseline requirements:
 
-* **Reliable AI Decisioning:** Overcoming local model instability by integrating and configuring a powerful instruction-following model (**Gemini 1.5 Flash**) for mission-critical classification.
+* **Reliable AI Decisioning:** Overcoming local model instability by integrating and configuring a powerful instruction-following model (**Gemini 2.5 Flash**) for mission-critical classification.
 * **Agentic Architecture:** Designing a **multi-agent system** where specialized agents (`Classifier` and `Answer-Bot`) share context and data flow responsibility, leading to superior final output quality.
 * **Robust Data Handling:** Implementing solutions (like the `Merge` and `trim()` expressions) to guarantee data integrity across complex workflow branches, ensuring the system can reliably read messy LLM output.
 * **Custom API Integration:** Demonstrating precise control over external systems by using dynamic URL resolution and authentication to perform write operations (comments and labels) via the **GitHub REST API**.
