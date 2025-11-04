@@ -79,6 +79,104 @@
       ],
       "id": "f1e18a72-e637-4d01-843c-43b0bea8d556",
       "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "url": "=https://hacker-news.firebaseio.com/v0/item/{{ $json.story_ids }}.json",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1104,
+        0
+      ],
+      "id": "7a9f6ee2-fb94-4e46-aba0-10b6bc239655",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3aa8e8e5-1ab3-43ae-9969-ad81c4fe34ba",
+              "name": "story_title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "3a838984-1e85-47d3-9a81-1f9b5b349a4b",
+              "name": "comment_ids",
+              "value": "={{ $json.kids ? $json.kids.slice(0, 5) : [] }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1328,
+        0
+      ],
+      "id": "8827a420-f635-4e85-a9b5-3bd7d9edbf90",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        0
+      ],
+      "id": "e4a0194a-6851-4996-bc8f-e5c9a3d305e6",
+      "name": "Wait",
+      "webhookId": "d3360c1f-9afd-4f02-9d66-100b059202bf"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "comment_ids",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1536,
+        0
+      ],
+      "id": "35ff439b-a456-4b6c-ab4f-10aa4813e66a",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "url": "=https://hacker-news.firebaseio.com/v0/item/{{ $json.comment_ids }}.json",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1744,
+        0
+      ],
+      "id": "c74e1068-f3cd-4060-bbfd-74ee20c352b0",
+      "name": "HTTP Request2"
     }
   ],
   "pinData": {},
@@ -107,7 +205,13 @@
     },
     "Edit Fields": {
       "main": [
-        []
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Aggregate": {
@@ -120,13 +224,57 @@
           }
         ]
       ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "88757dc5-31b0-4828-9999-36a0271e5eaf",
+  "versionId": "da7815e4-0e3c-4169-bfa4-ac26b25ee783",
   "meta": {
     "instanceId": "510d8e4857741bb67d61b20dd97c0a639eab26faff4cc8e2ccfa14019a176ccf"
   },
