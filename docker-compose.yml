@@ -9,6 +9,8 @@ services:
     environment:
       # This allows n8n's Code node to install custom npm packages
       - NODE_FUNCTION_ALLOW_EXTERNAL=axios,cheerio
+      # ADD THIS LINE: (Use your https ngrok URL)
+      - WEBHOOK_URL=https://gustavo-nonphysiologic-parliamentarily.ngrok-free.dev
     volumes:
       # This line maps the .n8n folder we created to the container
       - ./.n8n:/home/node/.n8n
