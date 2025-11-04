@@ -94,7 +94,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1104,
+        1120,
         0
       ],
       "id": "7a9f6ee2-fb94-4e46-aba0-10b6bc239655",
@@ -123,7 +123,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1328,
+        1344,
         0
       ],
       "id": "8827a420-f635-4e85-a9b5-3bd7d9edbf90",
@@ -136,7 +136,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        880,
+        896,
         0
       ],
       "id": "e4a0194a-6851-4996-bc8f-e5c9a3d305e6",
@@ -152,7 +152,7 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        1536,
+        1568,
         0
       ],
       "id": "35ff439b-a456-4b6c-ab4f-10aa4813e66a",
@@ -172,11 +172,109 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1744,
+        1792,
         0
       ],
-      "id": "c74e1068-f3cd-4060-bbfd-74ee20c352b0",
+      "id": "633ec691-bbe0-439f-9841-0ef6a358d4b0",
       "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "73b903fe-b300-487b-8480-572b5ca8564c",
+              "name": "story_title",
+              "value": "={{ $node[\"Split Out\"].json.story_title }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2016,
+        0
+      ],
+      "id": "fa3f2dc4-ca4b-420b-8ef3-98fdb386f18d",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Headline: {{ $json.story_title }}\n\nSynthesize the user sentiment based on the provided comments.",
+        "options": {
+          "systemMessage": "You are a tech analyst. You will be given a news headline and a list of all user comments (as context).\nYour task is to analyze the user comments to determine the public sentiment and key discussion points.\nSynthesize this into a 3-bullet-point summary."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        2272,
+        0
+      ],
+      "id": "ffd61089-67ed-4d3f-b994-290f62123ca2",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Searches the vector store to find and retrieve user comments related to a specific news story.",
+        "memoryKey": {
+          "__rl": true,
+          "value": "={{ $json.story_title }}",
+          "mode": "id"
+        },
+        "includeDocumentMetadata": false
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.3,
+      "position": [
+        2368,
+        224
+      ],
+      "id": "1d969c7e-5632-487e-809c-9e15cee8f95a",
+      "name": "Simple Vector Store1"
+    },
+    {
+      "parameters": {
+        "model": "nomic-embed-text:latest"
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
+      "typeVersion": 1,
+      "position": [
+        2448,
+        432
+      ],
+      "id": "215a8a61-7474-4c02-b158-b6d3ad2ebea3",
+      "name": "Embeddings Ollama1",
+      "credentials": {
+        "ollamaApi": {
+          "id": "a5DIFnzKljSIt7ZY",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        2240,
+        224
+      ],
+      "id": "c18afd38-8c9a-41d4-a770-52069515e4ca",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EZlEMT9vXQ30b9WY",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -268,14 +366,70 @@
           }
         ]
       ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Vector Store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Ollama1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Simple Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "da7815e4-0e3c-4169-bfa4-ac26b25ee783",
+  "versionId": "5c92c2a4-af45-4045-bb53-da244d8d7bdc",
   "meta": {
+    "templateCredsSetupCompleted": true,
     "instanceId": "510d8e4857741bb67d61b20dd97c0a639eab26faff4cc8e2ccfa14019a176ccf"
   },
   "id": "k9ywJ8tsKDFvbFqI",
