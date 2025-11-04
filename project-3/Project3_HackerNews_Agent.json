@@ -18,7 +18,7 @@
         0,
         0
       ],
-      "id": "b4021bcf-a638-439a-83ed-48bb2c830731",
+      "id": "f6a1f6bf-e609-4e51-96b4-ccc56700b513",
       "name": "Schedule Trigger"
     },
     {
@@ -39,7 +39,7 @@
         224,
         0
       ],
-      "id": "108c37fe-0e7b-4e6d-a60f-0fa9d690fe41",
+      "id": "10ffbe7b-818e-4e2d-a614-75e5d9d5d571",
       "name": "HTTP Request"
     },
     {
@@ -49,8 +49,8 @@
             {
               "id": "21929291-ded1-4235-bb7f-cdfaf55a91d4",
               "name": "story_ids",
-              "value": "={{ $json.all_story_ids.slice(0, 5) }}",
-              "type": "array"
+              "value": "={{ $json.all_story_ids[0] }}",
+              "type": "number"
             }
           ]
         },
@@ -62,7 +62,7 @@
         672,
         0
       ],
-      "id": "54c643b6-48e7-4ac9-8e55-cd52e119ef83",
+      "id": "6f9c7d03-f823-46dd-bb4d-bc9f67c7698a",
       "name": "Edit Fields"
     },
     {
@@ -77,22 +77,8 @@
         448,
         0
       ],
-      "id": "41382f24-0f0f-4a9d-ad71-99f594ae6d0a",
+      "id": "f1e18a72-e637-4d01-843c-43b0bea8d556",
       "name": "Aggregate"
-    },
-    {
-      "parameters": {
-        "fieldToSplitOut": "story_ids",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.splitOut",
-      "typeVersion": 1,
-      "position": [
-        896,
-        0
-      ],
-      "id": "97e42a14-8a5b-4844-94c3-fc3d03cbe3cd",
-      "name": "Split Out"
     }
   ],
   "pinData": {},
@@ -121,13 +107,7 @@
     },
     "Edit Fields": {
       "main": [
-        [
-          {
-            "node": "Split Out",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Aggregate": {
@@ -146,10 +126,10 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "feb7bca3-6821-4ae4-948b-f1529bb97095",
+  "versionId": "88757dc5-31b0-4828-9999-36a0271e5eaf",
   "meta": {
     "instanceId": "510d8e4857741bb67d61b20dd97c0a639eab26faff4cc8e2ccfa14019a176ccf"
   },
-  "id": "5WhFYE8K6nFCTVyp",
+  "id": "k9ywJ8tsKDFvbFqI",
   "tags": []
 }
