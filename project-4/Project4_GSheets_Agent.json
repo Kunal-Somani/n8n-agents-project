@@ -1,0 +1,63 @@
+{
+  "name": "Project4_GSheets_Agent",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        -32
+      ],
+      "id": "7e4cd882-c2ae-4ceb-8eb9-9de3953872c1",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "218fb73b-6cfc-48ef-80d8-8d5d52e575de",
+              "name": "unstructured_text ",
+              "value": "Hi, my name is Alex Johnson from TechCorp. I'm writing to ask about your enterprise pricing. My email is alex.j@techcorp.com. Thanks.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        16,
+        -32
+      ],
+      "id": "13e5ede9-6b87-465c-95ec-809cf3cefe49",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "0d136acd-e5c3-42dd-ac98-d89278de6e6a",
+  "meta": {
+    "instanceId": "510d8e4857741bb67d61b20dd97c0a639eab26faff4cc8e2ccfa14019a176ccf"
+  },
+  "id": "6AD3RyHC0Ev6ZNwv",
+  "tags": []
+}
