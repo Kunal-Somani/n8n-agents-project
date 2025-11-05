@@ -8,7 +8,7 @@ This moves beyond simple data fetching to establish a reliable mechanism for **s
 
 ---
 
-## ⚙️ Architectural Stack: Specialized Tools for Complex Tasks
+##  Architectural Stack: Specialized Tools for Complex Tasks
 
 The workflow is architected using best practices in agent design, utilizing specialized tools for each step of the data and knowledge chain.
 
