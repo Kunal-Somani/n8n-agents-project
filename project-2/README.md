@@ -1,4 +1,4 @@
-# 🎯 Project 2: Smart Scheduled Research Assistant
+#  Project 2: Smart Scheduled Research Assistant
 
 ## Objective
 
@@ -21,7 +21,7 @@ The workflow is architected using best practices in agent design, utilizing spec
 
 ---
 
-## 🚀 Technical Deep Dive: The Multi-Stage Data Pipeline
+##  Technical Deep Dive: The Multi-Stage Data Pipeline
 
 The workflow's complexity lies in the seamless, automated transformation of data from a raw XML stream to a final, stylized text report.
 
@@ -43,7 +43,7 @@ The workflow's complexity lies in the seamless, automated transformation of data
 
 ---
 
-## ✅ Skills Demonstrated (Beyond Basic Integration)
+##  Skills Demonstrated (Beyond Basic Integration)
 
 * **Complex Data Transformation:** Proven ability to handle and debug external API data types (XML/Atom), overcoming parsing errors without requiring external code libraries.
 * **Dynamic RAG Implementation:** Demonstrating a mechanism for **ephemeral, runtime-created RAG knowledge bases**, a more advanced technique than persistent, static document loading.
