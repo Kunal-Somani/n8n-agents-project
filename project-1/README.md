@@ -6,7 +6,7 @@ To engineer a highly reliable, autonomous workflow capable of **advanced issue t
 
 ---
 
-## ⚙️ Technologies and Architectural Stack
+##  Technologies and Architectural Stack
 
 | Component | Technology Used | Role and Professional Rationale |
 | :--- | :--- | :--- |
