@@ -1,5 +1,4 @@
-# Project-3 Readme
-# 🎯 Project 3: Live Hacker News 'Sentiment' Agent
+#  Project 3: Live Hacker News 'Sentiment' Agent
 
 ## Objective
 
@@ -9,7 +8,7 @@ This project demonstrates an advanced "just-in-time" RAG architecture, moving be
 
 ---
 
-## ⚙️ Technologies and Architectural Stack
+##  Technologies and Architectural Stack
 
 | Component | Technology Used | Architectural Role & Technical Rationale |
 | :--- | :--- | :--- |
@@ -22,7 +21,7 @@ This project demonstrates an advanced "just-in-time" RAG architecture, moving be
 
 ---
 
-## 🚀 Workflow Execution: A Multi-Stage Breakdown
+##  Workflow Execution: A Multi-Stage Breakdown
 
 This agent's complexity lies in its multi-stage data processing pipeline, which is required to feed the dynamic RAG system.
 
