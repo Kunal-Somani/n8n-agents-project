@@ -1,4 +1,4 @@
-# 🎯 Project 1: GitHub Issue Triage Agent
+#  Project 1: GitHub Issue Triage Agent
 
 ## Objective
 
@@ -17,7 +17,7 @@ To engineer a highly reliable, autonomous workflow capable of **advanced issue t
 
 ---
 
-## 🚀 Detailed Workflow Explanation
+##  Detailed Workflow Explanation
 
 The solution operates as a **two-stage agentic system**, separating the critical task of classification from the resource-intensive task of contextual answering.
 
@@ -40,7 +40,7 @@ The solution operates as a **two-stage agentic system**, separating the critical
 
 ---
 
-## ✅ Professional Skills Demonstrated
+##  Professional Skills Demonstrated
 
 This project successfully proves advanced competency in the following areas, exceeding baseline requirements:
 
