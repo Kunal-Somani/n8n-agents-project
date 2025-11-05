@@ -29,11 +29,83 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        16,
+        32,
         -32
       ],
       "id": "13e5ede9-6b87-465c-95ec-809cf3cefe49",
       "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json[\"unstructured_text \"] }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a hYou are an expert data extraction bot. Your job is to read a block of text and extract the key entities.\n\nYou must respond ONLY with a single, valid JSON object. Do not add any other text.\nIf a value is not found, use an empty string \"\"..\n\nHere are your examples:\n\nText: \"John from Acme Inc needs a quote. Email is john.doe@acme.com.\"\nJSON:\n{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@acme.com\",\n  \"company\": \"Acme Inc.\",\n  \"inquiry\": \"needs a quote\"\n}\n\nText: \"This is Sarah. I'm wondering about your services. sarah.k@gmail.com\"\nJSON:\n{\n  \"name\": \"Sarah\",\n  \"email\": \"sarah.k@gmail.com\",\n  \"company\": \"\",,\n  \"inquiry\": \"wondering about your services\"\n}elpful assistant"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        288,
+        -32
+      ],
+      "id": "8f83e4cc-91ef-4612-a62a-b1cc4a9b466f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        256,
+        192
+      ],
+      "id": "d1e68a8b-de23-472b-bf6b-01093a7e0510",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EZlEMT9vXQ30b9WY",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "={\n  \"type\": \"object\",\n  \"properties\": {\n    \"name\": { \"type\": \"string\" },\n    \"email\": { \"type\": \"string\" },\n    \"company\": { \"type\": \"string\" },\n    \"inquiry\": { \"type\": \"string\" }\n  },\n  \"required\": [\"name\", \"email\", \"inquiry\"]\n}",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        384,
+        192
+      ],
+      "id": "b9ae1ddc-ce40-4cb7-ae76-87861be4a084",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "model": "mistral:latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        464,
+        400
+      ],
+      "id": "17bf3e7e-9d42-4ee5-b5d8-839f15417dbf",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "a5DIFnzKljSIt7ZY",
+          "name": "Ollama account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -48,14 +120,59 @@
           }
         ]
       ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "0d136acd-e5c3-42dd-ac98-d89278de6e6a",
+  "versionId": "f99af5f5-7ee4-4b20-b432-d937ba4d94f9",
   "meta": {
+    "templateCredsSetupCompleted": true,
     "instanceId": "510d8e4857741bb67d61b20dd97c0a639eab26faff4cc8e2ccfa14019a176ccf"
   },
   "id": "6AD3RyHC0Ev6ZNwv",
